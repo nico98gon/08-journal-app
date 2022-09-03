@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { Grid, Link, Typography, TextField, Button } from "@mui/material";
 import { Link as IconLink } from "@mui/icons-material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/useForm";
+import { startCreatingUserWithEmailPassword } from "../../store/auth";
 
 const formData = {
     email: 'nicoh@gmail.com',
@@ -19,17 +21,21 @@ const formValidations = {
 
 export const RegisterPage = () => {
 
+    const dispatch = useDispatch();
+
     const [formSubmitted, setFormSubmitted] = useState(false);
-    
+
     const {
         formState, displayName, email, password, onInputChange,
         isFormValid, displayNameValid, emailValid, passwordValid
     } = useForm( formData, formValidations );
-    
+
     const onSubmit = ( event ) => {
         event.preventDefault();
         setFormSubmitted(true);
-        console.log(formState);
+        if ( !isFormValid ) return;
+        dispatch( startCreatingUserWithEmailPassword( formState ) );
+        console.log( formState );
     }
 
     return (
@@ -92,7 +98,7 @@ export const RegisterPage = () => {
 
                     <Grid container direction={'row'} justifyContent='end'>
                         <IconLink></IconLink>
-                        <Link component={ RouterLink } color='inherit' to="/auth/register" ml={ 1 }>
+                        <Link component={ RouterLink } color='inherit' to="/auth/login" ml={ 1 }>
                         Do you have an account?
                         </Link>
                     </Grid>
