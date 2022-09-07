@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
 import { loadNotes } from "../../helpers/loadNotes";
@@ -33,7 +32,6 @@ export const startLoadingNotes = () => {
 
         const { uid } = getState().auth;
         if ( !uid ) throw new Error("UID of user doesn't exist");
-        console.log(uid);
 
         const notes = await loadNotes( uid );
         
