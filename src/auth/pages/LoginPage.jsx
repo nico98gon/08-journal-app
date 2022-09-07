@@ -12,11 +12,6 @@ const formData = {
     password: ''
 }
 
-const formValidations = {
-    email: [ (value) => value.includes('@'), 'Mail should include @'],
-    password: [ (value) => value.length >= 6, 'Password should include 6 letters']
-}
-
 export const LoginPage = () => {
     
     const dispatch = useDispatch();
@@ -24,7 +19,7 @@ export const LoginPage = () => {
     const { status, errorMessage } = useSelector( state => state.auth );
     const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
 
-    const { formState, email, password, onInputChange, isFormValid } = useForm( formData, formValidations );
+    const { formState, email, password, onInputChange, isFormValid } = useForm( formData );
 
     const onGoogleSignIn = ( event ) => {
         event.preventDefault();
