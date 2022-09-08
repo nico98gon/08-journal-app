@@ -42,7 +42,7 @@ export const startLoadingNotes = () => {
 }
 
 export const startSaveNote = () => {
-    return async ( dispatch, getState ) => {
+    return async( dispatch, getState ) => {
 
         dispatch( setSaving() );
 
@@ -60,7 +60,7 @@ export const startSaveNote = () => {
 }
 
 export const startUploadingFiles = ( files = [] ) => {
-    return async ( dispatch ) => {
+    return async( dispatch ) => {
         dispatch( setSaving() );
         
         const fileUploadPromises = [];
