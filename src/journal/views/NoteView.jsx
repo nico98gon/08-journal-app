@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { DeleteOutline, SaveOutlined, UploadFileOutlined, UploadOutlined } from "@mui/icons-material"
 import { Button, Grid, IconButton, TextField, Typography, useFormControl } from "@mui/material"
+import { DeleteOutline, SaveOutlined, UploadFileOutlined, UploadOutlined } from "@mui/icons-material"
 import Swal from "sweetalert2"
 import 'sweetalert2/dist/sweetalert2.css';
 
@@ -13,7 +13,7 @@ export const NoteView = () => {
 
     const dispatch = useDispatch();
 
-    const { active:note, messageSaved, isSaving } = useSelector( state => state.journal); // active now change to note
+    const { active:note, messageSaved, notes, isSaving } = useSelector( state => state.journal); // active now change to note
 
     const { body, title, date, onInputChange, formState } = useForm( note )
 
@@ -33,7 +33,12 @@ export const NoteView = () => {
             Swal.fire('Note actualized', messageSaved, 'success');
         }
     }, [ messageSaved ])
-    
+
+    // useEffect(() => {
+    //     if ( notes = [] ) {
+    //         Swal.fire('Note deleted', messageSaved, 'error');
+    //     }
+    // }, [ notes ])
 
     const onSaveNote = () => {
         dispatch( startSaveNote() );
@@ -45,7 +50,24 @@ export const NoteView = () => {
     }
 
     const onDelete = () => {
-        dispatch( startDeletingNote() );
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch( startDeletingNote() );
+                Swal.fire(
+                    'Deleted!',
+                    `Your note ${ note.title } has been deleted.`,
+                    'success'
+                )
+            }
+        })
     }
 
     return (
