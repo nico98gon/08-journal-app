@@ -1,4 +1,3 @@
-import { Message } from '@mui/icons-material';
 import { createSlice } from '@reduxjs/toolkit';
 
 export const journalSlice = createSlice({
@@ -40,6 +39,10 @@ export const journalSlice = createSlice({
 
             state.messageSaved = `${ action.payload.title }, actualized`;
         },
+        setPhotosToActiveNote: (state, action) => {
+            state.active.imageUrls = [ ...state.active.imageUrls, ...action.payload ];
+            state.isSaving = false;
+        },
         deleteNodeById:( state, action ) => {
 
         },
@@ -50,10 +53,11 @@ export const journalSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     addNewEmptyNote,
-    setActiveNote,
-    setNotes,
-    setSaving,
-    updateNote,
     deleteNodeById,
     savingNewNote,
+    setActiveNote,
+    setNotes,
+    setPhotosToActiveNote,
+    setSaving,
+    updateNote,
 } = journalSlice.actions;
