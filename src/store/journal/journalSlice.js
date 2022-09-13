@@ -37,7 +37,7 @@ export const journalSlice = createSlice({
                 return note
             });
 
-            state.messageSaved = `${ action.payload.title }, actualized`;
+            state.messageSaved = `${ action.payload.title }, saved`;
         },
         setPhotosToActiveNote: ( state, action ) => {
             state.active.imageUrls = [ ...state.active.imageUrls, ...action.payload ];

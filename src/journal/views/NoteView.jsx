@@ -63,7 +63,7 @@ export const NoteView = () => {
                 dispatch( startDeletingNote() );
                 Swal.fire(
                     'Deleted!',
-                    `Your note ${ note.title } has been deleted.`,
+                    `Your note ${ note.title } has been deleted`,
                     'success'
                 )
             }
