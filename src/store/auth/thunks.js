@@ -16,7 +16,6 @@ export const startGoogleSignIn = () => {
         dispatch( checkingCredentials() );
 
         const result = await signInWithGoogle();
-
         if ( !result.ok ) return dispatch( logout( result.errorMessage ) );
 
         dispatch( login( result ));
@@ -38,11 +37,19 @@ export const startCreatingUserWithEmailPassword = ({ email, password, displayNam
 export const startLoginWithEmailPassword = ({ email, password }) => {
     return async( dispatch ) => {
 
-        dispatch( checkingCredentials() );
-        const { ok, uid, photoURL, errorMessage } = await loginWithEmailPassword({ email, password });
-        if ( !ok ) return dispatch( logout ({ errorMessage }) );
+        // the continuous  coment lines doesn't work on testing
 
-        dispatch( login({ uid, email, photoURL }));
+        // dispatch( checkingCredentials() );
+        // const { ok, uid, photoURL, errorMessage, email } = await loginWithEmailPassword({ email, password });
+        // if ( !ok ) return dispatch( logout ({ errorMessage }) );
+
+        // dispatch( login({ uid, email, photoURL }));
+        
+        dispatch( checkingCredentials() );
+        const result = await loginWithEmailPassword({ email, password });
+        if ( !result.ok ) return dispatch( logout ( result.errorMessage ) );
+
+        dispatch( login( result ));
     }
 }
 
