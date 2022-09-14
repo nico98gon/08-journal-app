@@ -1,4 +1,5 @@
-import { authSlice, checkingCredentials, login, logout } from "../../../store/auth/authSlice";
+
+import { authSlice, checkingCredentials, login, logout } from "../../../src/store/auth/authSlice";
 import { demoUser, initialState, authenticatedState, notauthenticatedState } from "../../fixtures/authFixtures";
 
 describe('testing authSlice', () => {
