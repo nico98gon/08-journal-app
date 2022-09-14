@@ -30,7 +30,7 @@ describe('test on fileUpload', () => {
         const cloudResp = await cloudinary.api.delete_resources([ 'journal/' + imageId ], {
             resource_type: 'image' // this ensures that what is going to delete is a type of image
         });
-        console.log({ cloudResp });
+        // console.log({ cloudResp });
 
     });
 
